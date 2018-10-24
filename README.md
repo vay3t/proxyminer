@@ -1,4 +1,5 @@
 # proxyminer
+Collect proxies format proxychains in https://www.socks-proxy.net
 
 ### Install
 ```
