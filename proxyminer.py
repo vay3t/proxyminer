@@ -16,5 +16,6 @@ for row in rows:
 
 for elemento in data:
 	if elemento:
-		print(elemento[4]+ " " +elemento[0]+ " " +elemento[1]+ " # " +elemento[2])
+		print(elemento)
+		print(elemento[4].lower()+ " " +elemento[0]+ " " +elemento[1]+ " # " +elemento[2])
 
