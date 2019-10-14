@@ -2,7 +2,6 @@ import requests
 from bs4 import BeautifulSoup
 import sys
 
-
 def obtainProxies():
 	r = requests.get("https://www.socks-proxy.net")
 	soup = BeautifulSoup(r.text, 'html.parser')
@@ -47,9 +46,11 @@ def checkProxy(lista):
 	proxy = {'http': buildProxy}
 	try:
 		requests.get('http://www.google.com', proxies=proxy)
-		print(printProxy+" ---> ON")
+		#print(printProxy+" ---> ON")
+		print(printProxy)
 	except requests.exceptions.ConnectionError:
-		print(printProxy+" ---> OFF")
+		#print("# "+printProxy+" ---> OFF")
+		pass
 
 
 def help():
@@ -57,11 +58,11 @@ def help():
 		
 	help - Show help
 	lister - Obtain list of proxies
-	ckecker - Obtain list of proxies and check if live
+	checker - Obtain list of proxies and check if live
 """)
 
 
-try:
+
 	if len(sys.argv) != 2:
 		help()
 	else:
@@ -71,11 +72,8 @@ try:
 			for proxy in obtainProxies():
 				print("{0} {1} {2} # {3}".format(proxy[0],proxy[1],proxy[2],proxy[3]))
 		elif sys.argv[1] == "checker":
-			for proxyList in obtainProxies():
-				checkProxy(proxyList)
-
-except KeyboardInterrupt:
-	sys.exit(0)
-
-except Exception as e:
-	print(e)
+			from multiprocessing import Pool
+			p = Pool(80)
+			p.map(checkProxy, obtainProxies())
+		else:
+			help()
