@@ -63,17 +63,17 @@ def help():
 
 
 
-	if len(sys.argv) != 2:
+if len(sys.argv) != 2:
+	help()
+else:
+	if sys.argv[1] == "help":
 		help()
+	elif sys.argv[1] == "lister":
+		for proxy in obtainProxies():
+			print("{0} {1} {2} # {3}".format(proxy[0],proxy[1],proxy[2],proxy[3]))
+	elif sys.argv[1] == "checker":
+		from multiprocessing import Pool
+		p = Pool(80)
+		p.map(checkProxy, obtainProxies())
 	else:
-		if sys.argv[1] == "help":
-			help()
-		elif sys.argv[1] == "lister":
-			for proxy in obtainProxies():
-				print("{0} {1} {2} # {3}".format(proxy[0],proxy[1],proxy[2],proxy[3]))
-		elif sys.argv[1] == "checker":
-			from multiprocessing import Pool
-			p = Pool(80)
-			p.map(checkProxy, obtainProxies())
-		else:
-			help()
+		help()
