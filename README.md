@@ -14,5 +14,5 @@ usage: python3 proxyminer.py <option>
 		
 	help - Show help
 	lister - Obtain list of proxies
-	ckecker - Obtain list of proxies and check if live
+	checker - Obtain list of proxies and check if live
 ```
