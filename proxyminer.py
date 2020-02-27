@@ -45,7 +45,8 @@ def obtainProxies():
 def checkProxy(lista):
 	buildProxy = "{0}://{1}:{2}".format(lista[0],lista[1],lista[2])
 	printProxy = "{0} {1} {2} # {3}".format(lista[0],lista[1],lista[2],lista[3])
-	proxy = {'http': buildProxy}
+	proxy = {'http': buildProxy,
+		'https': buildProxy}
 	try:
 		requests.get(urltarget, proxies=proxy)
 		#print(printProxy+" ---> ON")
