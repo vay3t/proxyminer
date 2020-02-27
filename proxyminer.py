@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 import sys
 
 global urltarget
+global listaproxys
+
+listaproxys = []
 
 def obtainProxies():
 	r = requests.get("https://www.socks-proxy.net")
@@ -51,6 +54,7 @@ def checkProxy(lista):
 		requests.get(urltarget, proxies=proxy)
 		#print(printProxy+" ---> ON")
 		print(printProxy)
+		return buildProxy
 	except requests.exceptions.ConnectionError:
 		#print("# "+printProxy+" ---> OFF")
 		pass
@@ -60,7 +64,12 @@ def help():
 	print("""usage: python3 """ + sys.argv[0] + """ <target>
 """)
 
-
+def runChecker(url):
+	requests.get(url)
+	from multiprocessing import Pool
+	p = Pool(80)
+	lista = p.map(checkProxy, obtainProxies())
+	return lista
 
 if len(sys.argv) != 2:
 	help()
@@ -68,10 +77,7 @@ else:
 	if sys.argv[1]:
 		urltarget = sys.argv[1]
 		try:
-			requests.get(urltarget)
-			from multiprocessing import Pool
-			p = Pool(80)
-			p.map(checkProxy, obtainProxies())
+			print(runChecker(urltarget))
 		except requests.exceptions.MissingSchema:
 			print("[!] Please add protocol https/http")
 		except requests.exceptions.ConnectionError:
