@@ -65,12 +65,16 @@ def help():
 if len(sys.argv) != 2:
 	help()
 else:
-	if sys.argv[1] == "help":
-		help()
-	elif sys.argv[1]:
+	if sys.argv[1]:
 		urltarget = sys.argv[1]
-		from multiprocessing import Pool
-		p = Pool(80)
-		p.map(checkProxy, obtainProxies())
+		try:
+			requests.get(urltarget)
+			from multiprocessing import Pool
+			p = Pool(80)
+			p.map(checkProxy, obtainProxies())
+		except requests.exceptions.MissingSchema:
+			print("[!] Please add protocol https/http")
+		except requests.exceptions.ConnectionError:
+			print("[-] Cant connect to "+urltarget)
 	else:
 		help()
