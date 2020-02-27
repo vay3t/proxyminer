@@ -58,6 +58,9 @@ def checkProxy(lista):
 	except requests.exceptions.ConnectionError:
 		#print("# "+printProxy+" ---> OFF")
 		pass
+	except requests.exceptions.ReadTimeout:
+		pass
+
 
 
 def help():
