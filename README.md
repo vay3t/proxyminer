@@ -1,5 +1,5 @@
 # proxyminer
-Collect proxies format proxychains in https://www.socks-proxy.net
+Collect proxies format proxychains in https://www.socks-proxy.net and test with your target
 
 ### Install
 ```
@@ -10,9 +10,5 @@ sudo pip3 install -r requirements.txt
 
 ### Help
 ```
-usage: python3 proxyminer.py <option>
-		
-	help - Show help
-	lister - Obtain list of proxies
-	checker - Obtain list of proxies and check if live
+usage: python3 proxyminer.py <target>
 ```
