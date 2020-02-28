@@ -80,7 +80,7 @@ else:
 	if sys.argv[1]:
 		urltarget = sys.argv[1]
 		try:
-			print(runChecker(urltarget))
+			runChecker(urltarget)
 		except requests.exceptions.MissingSchema:
 			print("[!] Please add protocol https/http")
 		except requests.exceptions.ConnectionError:
